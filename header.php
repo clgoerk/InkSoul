@@ -4,4 +4,4 @@
     <img src="images/InkSoulLogo.svg" alt="Ink Soul Logo" class="site-logo">
   </div>
 </header>
-<script src="scripts/script.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/css/lightbox.min.css" rel="stylesheet">

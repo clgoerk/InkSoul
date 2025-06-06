@@ -1,7 +1,6 @@
 <?php
 require("database.php");
 
-// Get selected category from URL if any
 $selectedCategory = $_GET['category'] ?? '';
 
 $query = "
@@ -22,7 +21,6 @@ $statement->execute();
 $images = $statement->fetchAll(PDO::FETCH_ASSOC);
 $statement->closeCursor();
 
-// Unique categories for filter dropdown
 $categories = [
   "Black & Grey", "Color", "Traditional", "Neo-Traditional", "Realism", "Portrait",
   "Fine Line", "Illustrative", "Japanese", "Tribal", "Watercolor", "Geometric",
@@ -37,6 +35,7 @@ $categories = [
   <meta charset="UTF-8">
   <title>Gallery - Ink Soul</title>
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/css/lightbox.min.css">
 </head>
 <body>
 
@@ -60,7 +59,11 @@ $categories = [
     <div class="gallery-grid">
       <?php foreach ($images as $img): ?>
         <div class="gallery-item">
-          <img src="images/gallery/<?= htmlspecialchars($img['image_path']) ?>" alt="<?= htmlspecialchars($img['title']) ?>">
+          <a href="images/gallery/<?= htmlspecialchars($img['image_path']) ?>"
+             data-lightbox="gallery"
+             data-title="<?= htmlspecialchars($img['title']) ?> - <?= htmlspecialchars($img['artist_name']) ?>">
+            <img src="images/gallery/<?= htmlspecialchars($img['image_path']) ?>" alt="<?= htmlspecialchars($img['title']) ?>">
+          </a>
           <div class="gallery-info">
             <h3><?= htmlspecialchars($img['title']) ?></h3>
             <p><?= htmlspecialchars($img['description']) ?></p>
@@ -73,6 +76,7 @@ $categories = [
   </main>
 
   <?php include("footer.php"); ?>
+  <script src="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/js/lightbox.min.js"></script>
 
 </body>
 </html>
