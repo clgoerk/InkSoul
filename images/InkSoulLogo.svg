@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 994 461.55">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 150px;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #fff;
+        font-family: InkInTheMeat-Tial, 'Ink In The Meat';
+        stroke: #bcbec0;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        font-size: 328.32px;
+      }
+    </style>
+  </defs>
+  <text class="cls-2" transform="translate(58.05 291.72) scale(1.09 1)"><tspan x="0" y="0">Ink Soul</tspan></text>
+  <text class="cls-1" transform="translate(165.92 433.6)"><tspan x="0" y="0">Your Story in Ink</tspan></text>
+</svg>

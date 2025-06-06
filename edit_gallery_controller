@@ -1,0 +1,64 @@
+<?php
+session_start();
+require("database.php");
+
+if (!isset($_SESSION['admin_id'])) {
+  header("Location: admin_login.php");
+  exit;
+}
+
+$id = $_POST['id'] ?? null;
+$title = htmlspecialchars($_POST['title'] ?? '');
+$description = htmlspecialchars($_POST['description'] ?? '');
+$category = htmlspecialchars($_POST['category'] ?? '');
+$artist_id = $_POST['artist_id'] !== '' ? intval($_POST['artist_id']) : null;
+
+if (!$id || !$title) {
+  $_SESSION['gallery_message'] = "❌ Title is required.";
+  header("Location: edit_gallery.php?id=" . urlencode($id));
+  exit;
+}
+
+// Fetch existing image info
+$stmt = $pdo->prepare("SELECT image_path FROM gallery WHERE id = ?");
+$stmt->execute([$id]);
+$existing = $stmt->fetch(PDO::FETCH_ASSOC);
+$existingImage = $existing['image_path'] ?? null;
+
+// Handle optional image replacement
+$image_path = $existingImage;
+if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === UPLOAD_ERR_OK) {
+  $uploadDir = __DIR__ . '/images/gallery/';
+  if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0777, true);
+  }
+
+  $filename = basename($_FILES['image_file']['name']);
+  $targetPath = $uploadDir . $filename;
+  $counter = 1;
+
+  while (file_exists($targetPath)) {
+    $fileInfo = pathinfo($filename);
+    $newName = $fileInfo['filename'] . "_" . $counter . "." . $fileInfo['extension'];
+    $targetPath = $uploadDir . $newName;
+    $counter++;
+  }
+
+  $finalFileName = basename($targetPath);
+
+  if (move_uploaded_file($_FILES['image_file']['tmp_name'], $targetPath)) {
+    // Delete old image if different
+    if ($existingImage && file_exists($uploadDir . $existingImage)) {
+      unlink($uploadDir . $existingImage);
+    }
+    $image_path = $finalFileName;
+  }
+}
+
+// Update gallery record
+$stmt = $pdo->prepare("UPDATE gallery SET title = ?, description = ?, category = ?, artist_id = ?, image_path = ? WHERE id = ?");
+$stmt->execute([$title, $description, $category, $artist_id, $image_path, $id]);
+
+$_SESSION['gallery_message'] = "✅ Image updated successfully.";
+header("Location: edit_gallery.php?id=" . urlencode($id));
+exit;
