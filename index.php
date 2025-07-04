@@ -1,5 +1,11 @@
 <?php
-// index.php
+  require_once 'database.php';
+
+  $query = "SELECT * FROM flash_tattoos ORDER BY created_at DESC";
+  $statement = $pdo->prepare($query);
+  $statement->execute();
+  $tattoos = $statement->fetchAll();
+  $statement->closeCursor();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,38 +15,63 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 
-<body>
-  
+<body class="home-page">
+
   <?php include("header.php"); ?>
 
-  <main class="home-content">
-    <section class="intro">
-      <h2>Welcome to Ink Soul<br><span>Where Art Meets Skin</span></h2>
-      <p>
-        At Ink Soul, we believe every tattoo tells a story — a symbol of strength, memory, passion, or transformation.
-        Located in the heart of Toronto, our studio brings together skilled artists, a commitment to hygiene and safety,
-        and a deep respect for the art of tattooing.
-      </p>
-      <p>
-        Explore our artists, browse our gallery, and book your session today.
-        <strong>Your skin is your canvas — let’s create something unforgettable.</strong>
-      </p>
-    </section>
+  <main>
+
     <section class="services-grid">
       <div class="service">
-        <a href="tattoo.php" class="service-link">
-          <img src="images/tattoo.webp" alt="Tattoo Service">
-          <h3>Tattoos</h3>
-          <p>We’ve answered your most frequently asked tattoo questions and everything about tattoo aftercare.</p>
-        </a>
+        <img src="images/tattoo.webp" alt="Tattoo Service">
+        <div class="service-text">
+          <h2>Tattoos</h2>
+          <p>Whether you know exactly what kind of tattoo you want or just have a general idea, we can help!</p>
+          <a href="contact.php" class="book-button">Book Now</a>
+        </div>
       </div>
+
       <div class="service">
         <img src="images/piercing.webp" alt="Piercing Service">
-        <h3>Piercings</h3>
-        <p>We’ve gathered our piercing aftercare guide, FAQs, and our piercer’s portfolios for inspiration.</p>
+        <div class="service-text">
+          <h2>Piercings</h2>
+          <p>Say no to piercing guns and have your piercings done by professionals with years of experience.</p>
+          <a href="contact.php" class="book-button">Book Now</a>
+        </div>
+      </div>
+
+      <div class="service">
+        <img src="images/flash_tattoo.png" alt="Piercing Service">
+        <div class="service-text">
+          <h2>Flash Tattoos</h2>
+          <p>New Flash Tattoos by our tattoo artists. Claim your next tattoo today.</p>
+          <a href="contact.php" class="book-button">Book Now</a>
+        </div>
       </div>
     </section>
   </main>
+
+<section class="flash-sale">
+  <h2>Flash Sale Tattoos</h2>
+  <div class="flash-sale-wrapper">
+    <div class="flash-sale-grid">
+      <?php foreach ($tattoos as $tattoo): ?>
+        <div class="flash-item">
+          <div class="flash-content">
+            <img src="<?= htmlspecialchars($tattoo['image_path']) ?>" alt="<?= htmlspecialchars($tattoo['title']) ?>" class="flash-image">
+            <p class="flash-info"><?= htmlspecialchars($tattoo['title']) ?> - $<?= htmlspecialchars($tattoo['price']) ?></p>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+
+  <!-- Buttons moved below -->
+  <div class="scroll-controls">
+    <button class="scroll-btn left">&larr;</button>
+    <button class="scroll-btn right">&rarr;</button>
+  </div>
+</section>
 
   <?php include('footer.php'); ?>
 

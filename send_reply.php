@@ -1,27 +1,65 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $to = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
-    $name = htmlspecialchars($_POST["name"]);
-    $subject = htmlspecialchars($_POST["subject"]);
-    $message = htmlspecialchars($_POST["message"]);
+require './PHPMailer/PHPMailerAutoload.php';
+require("database.php");
 
-    $fullMessage = "Hello $name,\n\n$message\n\n— Ink Soul";
-    $headers = "From: Ink Soul <clgoerk@rogers.com>\r\n";
-    $headers .= "Reply-To: Ink Soul <clgoerk@rogers.com>\r\n";
-    $headers .= "X-Mailer: PHP/" . phpversion();
+function valid_email($email) {
+  return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+}
 
-    $sent = mail($to, $subject, $fullMessage, $headers);
+function send_email($to_address, $to_name, $from_address, $from_name, $subject, $body, $is_body_html = false) {
+  if (!valid_email($to_address)) {
+    throw new Exception('Invalid To address: ' . htmlspecialchars($to_address));
+  }
 
-    if ($sent) {
-        // only redirect if the mail was actually sent
-        header("Location: reply_success.php?sent=1");
-        exit;
-    } else {
-        echo "<h2 style='text-align:center;'>❌ Failed to send reply.</h2>";
-        echo "<p style='text-align:center;'>This server may not support PHP mail(). Try using PHPMailer with SMTP or check server mail config.</p>";
-        echo "<p style='text-align:center;'><a href='admin_dashboard.php'>← Return to Dashboard</a></p>";
-    }
-} else {
-    header("Location: admin_dashboard.php");
-    exit;
+  if (!valid_email($from_address)) {
+    throw new Exception('Invalid From address: ' . htmlspecialchars($from_address));
+  }
+
+  $mail = new PHPMailer();
+  $mail->isSMTP();
+  $mail->Host = 'smtp.gmail.com';
+  $mail->SMTPSecure = 'tls';
+  $mail->Port = 587;
+  $mail->SMTPAuth = true;
+
+  $mail->Username = 'inksoultattooing@gmail.com';
+  $mail->Password = 'fnqv damh weyn xdyy';
+
+  $mail->setFrom($from_address, $from_name);
+  $mail->addAddress($to_address, $to_name);
+  $mail->Subject = $subject;
+  $mail->Body = $body;
+  $mail->AltBody = strip_tags($body);
+
+  if ($is_body_html) {
+    $mail->isHTML(true);
+  }
+
+  if (!$mail->send()) {
+    throw new Exception('Error sending email: ' . htmlspecialchars($mail->ErrorInfo));
+  }
+}
+
+try {
+  send_email(
+    $_POST['email'],
+    $_POST['name'],
+    'inksoultattooing@gmail.com',
+    'Ink Soul Admin',
+    $_POST['subject'],
+    $_POST['message'],
+    false
+  );
+
+  // ✅ Mark that specific message as replied
+  if (isset($_POST['contact_id'])) {
+    $stmt = $pdo->prepare("UPDATE contact SET status = 'replied' WHERE id = ?");
+    $stmt->execute([$_POST['contact_id']]);
+  }
+
+  header("Location: reply_success.php");
+  exit;
+
+} catch (Exception $e) {
+  echo '<p style="color:red;">Email failed: ' . $e->getMessage() . '</p>';
 }

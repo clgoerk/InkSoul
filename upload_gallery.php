@@ -1,6 +1,12 @@
 <?php
 require("database.php");
 session_start();
+
+if (!isset($_SESSION['admin_id'])) {
+  header("Location: admin_login.php");
+  exit;
+}
+
 $message = $_SESSION['upload_message'] ?? '';
 unset($_SESSION['upload_message']);
 
@@ -8,7 +14,6 @@ unset($_SESSION['upload_message']);
 $artistStmt = $pdo->query("SELECT id, name FROM artists ORDER BY name");
 $artists = $artistStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +26,14 @@ $artists = $artistStmt->fetchAll(PDO::FETCH_ASSOC);
   <?php include("header.php"); ?>
 
   <main>
-    <form action="upload_gallery_controller.php" method="post" enctype="multipart/form-data" class="gallery-upload-form">
+    <form action="upload_gallery_controller.php" method="post" enctype="multipart/form-data" html, body {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+  color: #000;
+  position: relative;
+  z-index: 0;
+}>
       <h2>Upload Gallery Image</h2>
 
       <?php if ($message): ?>
@@ -81,5 +93,6 @@ $artists = $artistStmt->fetchAll(PDO::FETCH_ASSOC);
   </main>
 
   <?php include("footer.php"); ?>
+
 </body>
 </html>

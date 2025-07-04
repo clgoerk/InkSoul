@@ -12,11 +12,13 @@
 
   <?php include("header.php"); ?>
 
-  <div class="success-container">
-    <h2>Thank You!</h2>
-    <p>Your message has been received. A member of our team will contact you shortly to confirm your appointment or respond to your inquiry.</p>
-    <p><a href="index.php" class="back-home">← Return to Home</a></p>
-  </div>
+  <main>
+    <div class="success-container">
+      <h2>Thank You!</h2>
+      <p>Your message has been received. A member of our team will contact you shortly to confirm your appointment or respond to your inquiry.</p>
+      <p><a href="index.php" class="back-home">← Return to Home</a></p>
+    </div>
+  </main>
 
   <?php include("footer.php"); ?>
 

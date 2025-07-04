@@ -9,11 +9,13 @@
 
   <?php include("header.php"); ?>
 
-  <div class="success-container">
-    <h2>Reply Sent</h2>
-    <p>Your response has been successfully sent to the contact.</p>
-    <p><a href="admin_dashboard.php" class="back-home">← Return to Dashboard</a></p>
-  </div>
+  <main>
+    <div class="success-container">
+      <h2>Reply Sent</h2>
+      <p>Your response has been successfully sent to the contact.</p>
+      <p><a href="admin_dashboard.php" class="back-home">← Return to Dashboard</a></p>
+    </div>
+  </main>
 
   <?php include("footer.php"); ?>
 

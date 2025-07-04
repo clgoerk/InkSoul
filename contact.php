@@ -12,7 +12,7 @@
 
   <?php include("header.php"); ?>
 
-  <main class="home-content">
+  <main>
     <h2 style="text-align:center;">Contact Us & Book an Appointment</h2>
 
     <form method="POST" action="contact_controller.php" class="contact-form" autocomplete="off">

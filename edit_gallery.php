@@ -24,6 +24,17 @@ if (!$image) {
 
 $message = $_SESSION['gallery_message'] ?? '';
 unset($_SESSION['gallery_message']);
+
+// Category options
+$categories = [
+  "Black & Grey", "Color", "Traditional", "Neo-Traditional", "Realism", "Portrait",
+  "Fine Line", "Illustrative", "Japanese", "Tribal", "Watercolor", "Geometric",
+  "Script", "Minimalist", "Surrealism", "Dotwork", "Biomechanical", "Horror",
+  "Mandala", "Ornamental"
+];
+
+// Fetch artists for dropdown
+$artists = $pdo->query("SELECT id, name FROM artists ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +49,7 @@ unset($_SESSION['gallery_message']);
   <main>
     <form action="edit_gallery_controller.php" method="post" enctype="multipart/form-data" class="gallery-upload-form">
       <h2>Edit Gallery Image</h2>
-      
+
       <?php if ($message): ?>
         <div class="message <?= strpos($message, '❌') !== false ? 'error' : '' ?>">
           <?= $message ?>
@@ -54,10 +65,23 @@ unset($_SESSION['gallery_message']);
       <textarea name="description" rows="4"><?= htmlspecialchars($image['description']) ?></textarea>
 
       <label>Category:</label>
-      <input type="text" name="category" value="<?= htmlspecialchars($image['category']) ?>">
+      <select name="category" required>
+        <?php foreach ($categories as $cat): ?>
+          <option value="<?= htmlspecialchars($cat) ?>" <?= $cat === $image['category'] ? 'selected' : '' ?>>
+            <?= htmlspecialchars($cat) ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
 
-      <label>Artist ID (optional):</label>
-      <input type="number" name="artist_id" value="<?= htmlspecialchars($image['artist_id']) ?>">
+      <label>Artist:</label>
+      <select name="artist_id">
+        <option value="">—</option>
+        <?php foreach ($artists as $artist): ?>
+          <option value="<?= $artist['id'] ?>" <?= $artist['id'] == $image['artist_id'] ? 'selected' : '' ?>>
+            <?= htmlspecialchars($artist['name']) ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
 
       <label>Replace Image (optional):</label>
       <input type="file" name="image_file" accept="image/*">

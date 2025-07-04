@@ -1,4 +1,6 @@
-/* === Reset & Global === */
+/* ===================================== */
+/* === Reset & Global Styles ========== */
+/* ===================================== */
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +8,8 @@
   scroll-behavior: smooth;
 }
 
-body {
+html, body {
+  height: 100%;
   font-family: Arial, sans-serif;
   background: #f0f0f0;
   color: #000;
@@ -17,22 +20,35 @@ body {
 body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   height: 100%;
   background-image: url('../images/body_background.jpeg');
   background-size: cover;
   background-position: center;
-  opacity: 0.2; /* 20% opacity */
+  opacity: 0.2;
   z-index: -1;
 }
 
-/* === Navigation Bar === */
+body.home-page::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../images/tattoo_shop.png'); 
+  background-size: cover;
+  background-position: center;
+  opacity: 0.8;
+  z-index: -1;
+}
+
+/* ===================================== */
+/* === Navigation Bar ================= */
+/* ===================================== */
 .main-nav {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   height: 60px;
   background-color: rgba(0, 0, 0, 0.9);
@@ -44,13 +60,11 @@ body::before {
 }
 
 #mobileMenu {
-  display: block;
-  width: 40px;
-  height: auto;
-  position: relative;
-  z-index: 1001;
-  cursor: pointer;
   display: none;
+  width: 40px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1001;
 }
 
 #mobileMenu .bar {
@@ -66,14 +80,15 @@ body::before {
 #mobileMenu.open .bar:nth-child(1) {
   transform: rotate(45deg) translate(5px, 6px);
 }
+
 #mobileMenu.open .bar:nth-child(2) {
   opacity: 0;
 }
+
 #mobileMenu.open .bar:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -6px);
 }
 
-/* === Navigation Links === */
 .nav-links {
   list-style: none;
   display: flex;
@@ -95,19 +110,20 @@ body::before {
   background-color: transparent;
 }
 
-/* === Header === */
+/* ===================================== */
+/* === Header ========================= */
+/* ===================================== */
 .site-header {
   background-image: url('../images/Ink_header.png');
   background-size: cover;
   background-position: center;
   height: 400px;
-  position: relative;
-  color: white;
+  margin-bottom: 25px;
   text-align: center;
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin-bottom: 25px;
+  align-items: center;
+  color: white;
 }
 
 .site-header .overlay {
@@ -118,85 +134,201 @@ body::before {
 
 .site-header .site-logo {
   width: 500px;
-  display: block;
   margin: 0 auto;
 }
 
-/* === Home Page === */
-.home-content {
+/* ===================================== */
+/* === Main Content =================== */
+/* ===================================== */
+main {
   padding: 40px 20px;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: auto;
 }
 
-.home-content h2 {
+main h2 {
   font-size: 2em;
   margin-bottom: 15px;
 }
 
-.home-content span {
+main span {
   font-size: 1.5em;
   color: #555;
 }
 
-.home-content p {
-  margin-bottom: 20px;
+main p {
   font-size: 1.05em;
+  margin-bottom: 20px;
 }
 
-/* === Services Grid === */
+/* ===================================== */
+/* === Services Grid ================== */
+/* ===================================== */
 .services-grid {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   gap: 30px;
   margin-top: 40px;
+  justify-content: space-between;
 }
 
 .service {
-  flex: 1;
-  min-width: 280px;
-  background: #f8f8f8;
+  position: relative;
+  max-width: 300px;
+  height: 400px;
+  overflow: hidden;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-}
-
-.service:hover {
-  transform: translateY(-5px);
 }
 
 .service img {
   width: 100%;
-  height: 250px;
+  height: 100%;
   object-fit: cover;
-}
-
-.service h3 {
-  padding: 15px 20px 5px;
-  font-size: 1.4em;
-}
-
-.service p {
-  padding: 0 20px 20px;
-  font-size: 0.95em;
-  color: #333;
-}
-
-.service a.service-link {
   display: block;
-  color: inherit;
-  text-decoration: none;
 }
 
-/* === Forms === */
+.service-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.book-button {
+  background: #0f0;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.book-button:hover {
+  background: #0c0;
+}
+
+/* ===================================== */
+/* === Flash Sale ===================== */
+/* ===================================== */
+.flash-sale {
+  background: #fff;
+  color: #000;
+  min-height: 200px;
+  padding: 10px 5px;
+  margin-top: 30px;
+  text-align: center;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.flash-sale h2 {
+  font-size: 1.8em;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.flash-sale-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.flash-sale-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 30px;
+  padding: 10px 20px;
+
+  /* Hide scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.flash-sale-grid::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.flash-item {
+  flex: 0 0 auto;
+  background: #fff;
+  padding: 6px;
+  border-radius: 6px;
+  width: 180px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flash-content {
+  width: 100%;
+  text-align: center;
+}
+
+.flash-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+
+.flash-info {
+  margin-top: 4px;
+  font-size: 0.9em;
+  color: #000;
+}
+
+/* === Scroll Buttons BELOW the grid === */
+.scroll-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.scroll-btn {
+  position: static;
+  transform: none;
+  background: #000;
+  border: none;
+  color: #fff;
+  font-size: 1.5em;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.scroll-btn:hover {
+  background: #444;
+}
+
+/* ===================================== */
+/* === Forms & Inputs ================= */
+/* ===================================== */
 form, .contact-form {
   background: #fff;
   padding: 30px;
   max-width: 500px;
   margin: 40px auto;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
   border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 label {
@@ -215,9 +347,9 @@ textarea {
   width: 100%;
   padding: 10px;
   margin-top: 6px;
+  font-size: 1em;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 1em;
   font-family: inherit;
 }
 
@@ -229,11 +361,11 @@ input[type="submit"] {
   margin-top: 20px;
   background: #000;
   color: #fff;
-  border: none;
   padding: 12px;
-  width: 100%;
-  font-size: 1em;
   border-radius: 6px;
+  width: 100%;
+  border: none;
+  font-size: 1em;
   cursor: pointer;
   transition: background 0.3s ease;
 }
@@ -242,7 +374,9 @@ input[type="submit"]:hover {
   background: #333;
 }
 
-/* === Button Link === */
+/* ===================================== */
+/* === Buttons & Links ================ */
+/* ===================================== */
 a.button-link,
 input.button-link,
 button.button-link {
@@ -253,10 +387,10 @@ button.button-link {
   border-radius: 4px;
   font-weight: bold;
   text-decoration: none;
-  transition: background 0.3s ease;
   border: none;
   cursor: pointer;
   text-align: center;
+  transition: background 0.3s ease;
 }
 
 a.button-link:hover,
@@ -265,35 +399,25 @@ button.button-link:hover {
   background-color: #0c0;
 }
 
-/* === Messages === */
-.message {
-  text-align: center;
-  margin-bottom: 20px;
-  color: green;
-  font-weight: bold;
-}
-
-.error {
-  color: red;
-}
-
-/* === Admin Dashboard === */
+/* ===================================== */
+/* === Admin Dashboard Tables ========= */
+/* ===================================== */
 .dashboard-section {
   margin-top: 60px;
 }
 
 .dashboard-section h3 {
   font-size: 1.4em;
-  color: #111;
   margin-bottom: 10px;
-  border-bottom: 2px solid #000;
   padding-bottom: 5px;
+  border-bottom: 2px solid #000;
+  color: #111;
 }
 
 table {
   width: 100%;
-  border-collapse: collapse;
   margin-top: 20px;
+  border-collapse: collapse;
 }
 
 th, td {
@@ -317,10 +441,9 @@ td.action-buttons {
 
 .action-buttons form {
   display: inline-block;
-  margin: 0;
-  padding: 0;
   background: none;
-  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 .edit-btn,
@@ -352,20 +475,176 @@ td.action-buttons {
   background-color: #a71d2a;
 }
 
-.collapsible {
-  cursor: pointer;
-  margin-bottom: 10px;
+/* === Status Labels === */
+.status-cell {
+  text-align: center;
 }
 
-.collapsible:hover {
-  color: #0073e6;
+.status-label {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.85em;
+  text-transform: capitalize;
+  margin: 0 auto;
 }
 
-.collapsible-content {
-  transition: all 0.3s ease;
+.status-label.new {
+  background-color: #f44336;
+  color: white;
 }
 
-/* === Footer === */
+.status-label.read {
+  background-color: #ff9800;
+  color: white;
+}
+
+.status-label.replied {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* ===================================== */
+/* === Artists Page =================== */
+/* ===================================== */
+
+/* === Intro Section === */
+.artist-intro {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.artist-tagline {
+  text-align: center;
+  font-size: 1.2em;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* === Artist List (Grid of Cards) === */
+.artist-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 20px;
+  margin-bottom: 60px;
+}
+
+.artist-card {
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+}
+
+.artist-photo {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #000;
+  transition: transform 0.3s, border-color 0.3s;
+  display: block;
+  margin: 0 auto;
+}
+
+.artist-card:hover .artist-photo {
+  transform: scale(1.1);
+  border-color: #0f0;
+}
+
+.artist-name {
+  margin-top: 8px;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.artist-card:hover .artist-name {
+  color: #0f0;
+}
+
+/* === Artist Detail Section (Dynamic) === */
+.artist-detail {
+  display: none;
+  background: #fff;
+  padding: 40px 20px;
+  margin-top: 40px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.artist-profile-content {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.artist-profile-content .artist-photo {
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.artist-bio {
+  margin: 15px 0;
+  color: #333;
+  font-size: 1.05em;
+}
+
+.artist-meta {
+  font-size: 1em;
+  margin-bottom: 20px;
+}
+
+.artist-detail table {
+  margin: 0 auto;
+  text-align: left;
+  font-size: 1em;
+  border-collapse: collapse;
+}
+
+.artist-detail th {
+  text-align: right;
+  padding-right: 10px;
+  color: #000;
+  font-weight: bold;
+}
+
+.artist-detail td {
+  text-align: left;
+  color: #111;
+}
+
+/* === Tattoo Gallery === */
+.tattoo-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.tattoo-gallery img {
+  width: 175px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 2px solid #ccc;
+  transition: transform 0.3s ease;
+}
+
+.tattoo-gallery img:hover {
+  transform: scale(1.05);
+  border-color: #0f0;
+}
+
+/* ===================================== */
+/* === Footer ========================= */
+/* ===================================== */
 .main-footer {
   background-color: #222;
   color: #ccc;
@@ -384,7 +663,9 @@ td.action-buttons {
   text-decoration: underline;
 }
 
-/* === FAQ === */
+/* ===================================== */
+/* === FAQ Section ==================== */
+/* ===================================== */
 .faq-container {
   max-width: 1000px;
   margin: 80px auto;
@@ -415,29 +696,33 @@ td.action-buttons {
   line-height: 1.6;
 }
 
-/* === Aftercare Section === */
+/* ===================================== */
+/* === Aftercare Section ============== */
+/* ===================================== */
 .aftercare {
   margin-top: 60px;
 }
 
 .aftercare h3 {
   font-size: 2em;
-  color: #000;
   margin-bottom: 20px;
+  color: #000;
 }
 
 .aftercare p {
   font-size: 1em;
   color: #333;
-  line-height: 1.6;
   margin-bottom: 16px;
+  line-height: 1.6;
 }
 
-/* === Gallery Page Styles === */
+/* ===================================== */
+/* === Gallery Page =================== */
+/* ===================================== */
 .gallery-page {
-  padding: 40px 20px;
   max-width: 1200px;
   margin: auto;
+  padding: 40px 20px;
 }
 
 .gallery-title {
@@ -449,17 +734,17 @@ td.action-buttons {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
   gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
 }
 
 .gallery-item {
   background: #fff;
   border-radius: 8px;
   overflow: hidden;
+  padding: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
-  padding: 10px;
 }
 
 .gallery-item:hover {
@@ -470,7 +755,6 @@ td.action-buttons {
   width: 100%;
   height: 80%;
   object-fit: cover;
-  display: block;
 }
 
 .gallery-info {
@@ -478,9 +762,9 @@ td.action-buttons {
 }
 
 .gallery-info h3 {
-  margin-bottom: 8px;
   font-size: 1em;
   color: #000;
+  margin-bottom: 8px;
 }
 
 .gallery-info p {
@@ -488,23 +772,17 @@ td.action-buttons {
   color: #555;
 }
 
-/* === Gallery Page Filter Styles === */
+/* === Gallery Filter Form === */
 .gallery-filter-form {
+  background: #fff;
+  max-width: 400px;
+  margin: 0 auto 30px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-  max-width: 400px;
-  margin: 0 auto 30px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.gallery-filter-form label:first-child {
-  margin-top: 0;
-  padding-top: 0;
 }
 
 .gallery-filter-form label {
@@ -518,14 +796,14 @@ td.action-buttons {
   font-size: 1em;
 }
 
-/* === Gallery Upload Form Styling === */
+/* === Gallery Upload Form === */
 form.gallery-upload-form {
   background: #fff;
   padding: 30px;
   max-width: 600px;
   margin: 60px auto;
-  box-shadow: 0 0 12px rgba(0,0,0,0.1);
   border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
 }
 
 form.gallery-upload-form h2 {
@@ -534,66 +812,64 @@ form.gallery-upload-form h2 {
   color: #000;
 }
 
-form.gallery-upload-form label {
-  display: block;
-  margin-top: 15px;
+/* ===================================== */
+/* === Success / Error Messages ======= */
+/* ===================================== */
+.message {
+  color: green;
   font-weight: bold;
-  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-form.gallery-upload-form input[type="text"],
-form.gallery-upload-form input[type="number"],
-form.gallery-upload-form input[type="file"],
-form.gallery-upload-form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-top: 6px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1em;
-  font-family: inherit;
+.error {
+  color: red;
 }
 
-form.gallery-upload-form textarea {
-  resize: vertical;
-  min-height: 100px;
+.success-container {
+  background: #fff;
+  padding: 30px;
+  max-width: 600px;
+  margin: 80px auto;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-form.gallery-upload-form input[type="submit"] {
-  margin-top: 25px;
-  background: #000;
-  color: #fff;
-  border: none;
-  padding: 12px;
-  width: 100%;
-  font-size: 1em;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+.success-container h2 {
+  color: green;
+  margin-bottom: 15px;
 }
 
-form.gallery-upload-form input[type="submit"]:hover {
-  background: #333;
+.success-container p {
+  font-size: 1.1em;
+  margin-top: 10px;
 }
 
-/* === Responsive === */
+/* ===================================== */
+/* === Responsive Styles ============== */
+/* ===================================== */
 @media (max-width: 768px) {
+  html, body {
+    display: grid;
+    grid-template-rows: 1fr;
+  }
 
-#mobileMenu {
-  display: block;
-}
+  #mobileMenu {
+    display: block;
+  }
 
   .nav-links {
     display: none;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0,0,0,0.9);
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
+    padding-bottom: 20px;
     text-align: center;
     z-index: 999;
-    padding-bottom: 20px;
   }
 
   .nav-links.show {
@@ -605,7 +881,7 @@ form.gallery-upload-form input[type="submit"]:hover {
   }
 
   .site-header .site-logo {
-  width: 300px;
+    width: 300px;
   }
 
   .home-content {
@@ -616,7 +892,7 @@ form.gallery-upload-form input[type="submit"]:hover {
     flex-direction: column;
   }
 
-    form {
+  form {
     width: 90%;
     padding: 10px;
   }
@@ -632,4 +908,38 @@ form.gallery-upload-form input[type="submit"]:hover {
   form label {
     font-size: 0.95em;
   }
+
+  .success-container {
+    margin: 40px 16px;
+    padding: 20px;
+  }
+
+  .dashboard-section-content {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 700px; 
+  }
+
+  .artist-photo,
+  .artist-profile-content .artist-photo {
+    width: 180px;
+    height: 180px;
+  }
+
+  .tattoo-gallery img {
+    width: 140px;
+    height: 200px;
+  }
+
+  .artist-detail {
+    padding: 30px 15px;
+  }
+
+  .artist-bio,
+  .artist-meta {
+    font-size: 0.95em;
+  }
 }
+
