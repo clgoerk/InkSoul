@@ -13,15 +13,14 @@ require("admin_login_controller.php");
   <?php include("header.php"); ?>
 
   <main>
-    <h2 style="text-align:center;">Admin Login</h2>
-
     <?php if (!empty($message)): ?>
       <div class="message <?= strpos($message, '❌') !== false ? 'error' : '' ?>">
         <?= htmlspecialchars($message) ?>
       </div>
     <?php endif; ?>
 
-    <form method="POST" action="" autocomplete="off">
+    <form method="POST" action="" class="contact-form" autocomplete="off">
+      <h2 style="text-align:center;">Admin Login</h2>
       <label>Username</label>
       <input type="text" name="username" autocomplete="off" required>
 
@@ -29,11 +28,13 @@ require("admin_login_controller.php");
       <input type="password" name="password" autocomplete="off" required>
 
       <input type="submit" value="Login">
+
+      <p style="text-align:center; margin-top: 20px;">
+      Don’t have an account? <a href="admin_register.php">Create one</a>
+      </p>
     </form>
 
-    <p style="text-align:center; margin-top: 20px;">
-      Don’t have an account? <a href="admin_register.php">Create one</a>
-    </p>
+
   </main>
 
   <?php include("footer.php"); ?>

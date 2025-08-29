@@ -23,10 +23,11 @@ body::before {
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../images/body_background.jpeg');
+  background-image: url('../images/tattoo_shop.png'); 
+  background-color: rgba(255, 255, 255, 0.25); /* White with 95% opacity */
   background-size: cover;
   background-position: center;
-  opacity: 0.2;
+  background-blend-mode: overlay;
   z-index: -1;
 }
 
@@ -36,7 +37,6 @@ body.home-page::before {
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../images/tattoo_shop.png'); 
   background-size: cover;
   background-position: center;
   opacity: 0.8;
@@ -110,6 +110,12 @@ body.home-page::before {
   background-color: transparent;
 }
 
+nav a.active {
+  color: orange;
+  font-weight: bold;
+  border-bottom: 2px solid orange; 
+}
+
 /* ===================================== */
 /* === Header ========================= */
 /* ===================================== */
@@ -142,7 +148,7 @@ body.home-page::before {
 /* ===================================== */
 main {
   padding: 40px 20px;
-  max-width: 1200px;
+  max-width: 1500px;
   margin: auto;
 }
 
@@ -215,26 +221,50 @@ main p {
 
 .book-button:hover {
   background: #0c0;
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
 }
 
 /* ===================================== */
 /* === Flash Sale ===================== */
 /* ===================================== */
+.flash-sale-title {
+  animation: flashPulse 1.2s infinite alternate;
+  color: #000; 
+  font-weight: bold;
+}
+
+@keyframes flashPulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    color: #111;
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+    color: #0f0; 
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    color: #111;
+  }
+}
+
 .flash-sale {
   background: #fff;
   color: #000;
   min-height: 200px;
-  padding: 10px 5px;
+  padding: 20px 20px;
   margin-top: 30px;
   text-align: center;
-  border-radius: 8px;
   position: relative;
   overflow: hidden;
 }
 
 .flash-sale h2 {
-  font-size: 1.8em;
-  margin-bottom: 5px;
+  font-size: 2.4em;
   color: #000;
 }
 
@@ -317,6 +347,8 @@ main p {
 
 .scroll-btn:hover {
   background: #444;
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
 }
 
 /* ===================================== */
@@ -325,7 +357,7 @@ main p {
 form, .contact-form {
   background: #fff;
   padding: 30px;
-  max-width: 500px;
+  max-width: 600px;
   margin: 40px auto;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -397,13 +429,32 @@ a.button-link:hover,
 input.button-link:hover,
 button.button-link:hover {
   background-color: #0c0;
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
 }
 
 /* ===================================== */
 /* === Admin Dashboard Tables ========= */
 /* ===================================== */
+
+.dashboard-container {
+  margin: 30px auto;
+  padding: 60px 40px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  width: 100%;
+}
+
 .dashboard-section {
   margin-top: 60px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dashboard-section:hover {
+  background-color: #f4f4f4;
+  transform: scale(1.02);
+  cursor: pointer;
 }
 
 .dashboard-section h3 {
@@ -413,6 +464,8 @@ button.button-link:hover {
   border-bottom: 2px solid #000;
   color: #111;
 }
+
+
 
 table {
   width: 100%;
@@ -447,7 +500,9 @@ td.action-buttons {
 }
 
 .edit-btn,
+.approve-btn,
 .delete-btn {
+  width: 75px;
   padding: 4px 10px;
   margin: 2px 0;
   font-size: 0.85em;
@@ -465,6 +520,18 @@ td.action-buttons {
 
 .edit-btn:hover {
   background-color: #0056b3;
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+.approve-btn {
+  background-color: #0c0;
+}
+
+.approve-btn:hover {
+  background-color: #040;
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
 }
 
 .delete-btn {
@@ -473,7 +540,10 @@ td.action-buttons {
 
 .delete-btn:hover {
   background-color: #a71d2a;
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
 }
+
 
 /* === Status Labels === */
 .status-cell {
@@ -510,6 +580,17 @@ td.action-buttons {
 /* ===================================== */
 
 /* === Intro Section === */
+
+.card-container {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 40px 20px;
+  max-width: 1100px;
+  margin: 30px auto;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
 .artist-intro {
   text-align: center;
   margin-top: 20px;
@@ -569,9 +650,11 @@ td.action-buttons {
   display: none;
   background: #fff;
   padding: 40px 20px;
-  margin-top: 40px;
-  border-radius: 8px;
+  margin: 30px auto;
+  border-radius: 12px;
   text-align: center;
+  max-width: 1100px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
 }
 
 .artist-profile-content {
@@ -643,6 +726,121 @@ td.action-buttons {
 }
 
 /* ===================================== */
+/* === Services Page ========================= */
+/* ===================================== */
+.card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 40px 30px;
+  margin-bottom: 40px;
+  overflow: hidden; /* ensures it wraps floated/flex children */
+  display: block;   /* just in case */
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #111;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  justify-items: center;
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 10px;
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%; /* important */
+  box-sizing: border-box;
+}
+
+.service-card img {
+  width: 100%;
+  height: 300px; /* prevents collapsing if image doesn't load */
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.service-card p {
+  overflow-wrap: break-word;
+  padding: 0 10px;
+}
+
+.how-it-works {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: 20px;
+  line-height: 1.6;
+}
+
+.animated-process {
+  text-align: center;
+  margin-top: 20px;
+  min-height: 60px;
+}
+
+#processDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* ✅ centers each step horizontally */
+  gap: 12px;           /* ✅ space between steps */
+  padding: 10px;
+  text-align: center;
+}
+
+.process-step {
+  font-size: 1.4em;
+  opacity: 1;
+  transform: translateY(30px); 
+  transition: all 0.6s ease;
+  background: transparent;
+  color: #111;
+  width: 100%;
+  max-width: 600px;
+  color: #777;
+}
+
+.process-step.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background-color: #000;
+  color: #fff;
+  padding: 15px 30px;
+  text-decoration: none;
+  border-radius: 8px;
+  display: inline-block;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #333;
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* ===================================== */
 /* === Footer ========================= */
 /* ===================================== */
 .main-footer {
@@ -661,59 +859,6 @@ td.action-buttons {
 
 .main-footer a:hover {
   text-decoration: underline;
-}
-
-/* ===================================== */
-/* === FAQ Section ==================== */
-/* ===================================== */
-.faq-container {
-  max-width: 1000px;
-  margin: 80px auto;
-  padding: 0 20px;
-}
-
-.faq-container h2 {
-  font-size: 2.5em;
-  text-align: center;
-  margin-bottom: 40px;
-  color: #000;
-}
-
-.faq-item {
-  margin-bottom: 30px;
-}
-
-.faq-item .question {
-  font-weight: bold;
-  font-size: 1.2em;
-  color: #000;
-  margin-bottom: 8px;
-}
-
-.faq-item .answer {
-  font-size: 1em;
-  color: #333;
-  line-height: 1.6;
-}
-
-/* ===================================== */
-/* === Aftercare Section ============== */
-/* ===================================== */
-.aftercare {
-  margin-top: 60px;
-}
-
-.aftercare h3 {
-  font-size: 2em;
-  margin-bottom: 20px;
-  color: #000;
-}
-
-.aftercare p {
-  font-size: 1em;
-  color: #333;
-  margin-bottom: 16px;
-  line-height: 1.6;
 }
 
 /* ===================================== */
@@ -775,7 +920,7 @@ td.action-buttons {
 /* === Gallery Filter Form === */
 .gallery-filter-form {
   background: #fff;
-  max-width: 400px;
+  max-width: 1400px;
   margin: 0 auto 30px;
   padding: 20px;
   border-radius: 10px;
@@ -791,7 +936,7 @@ td.action-buttons {
 }
 
 .gallery-filter-form select {
-  width: 100%;
+  width: 30%;
   padding: 8px;
   font-size: 1em;
 }
@@ -894,6 +1039,7 @@ form.gallery-upload-form h2 {
 
   form {
     width: 90%;
+    min-width: 400px;
     padding: 10px;
   }
 
@@ -912,14 +1058,6 @@ form.gallery-upload-form h2 {
   .success-container {
     margin: 40px 16px;
     padding: 20px;
-  }
-
-  .dashboard-section-content {
-    overflow-x: auto;
-  }
-
-  table {
-    min-width: 700px; 
   }
 
   .artist-photo,

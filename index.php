@@ -52,7 +52,7 @@
   </main>
 
 <section class="flash-sale">
-  <h2>Flash Sale Tattoos</h2>
+  <h2 class="flash-sale-title">Flash Sale Tattoos</h2>
   <div class="flash-sale-wrapper">
     <div class="flash-sale-grid">
       <?php foreach ($tattoos as $tattoo): ?>

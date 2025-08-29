@@ -42,9 +42,10 @@ $categories = [
   <?php include("header.php"); ?>
 
   <main class="gallery-page">
-    <h2 class="gallery-title">Check out some of our recent tattoos</h2>
+  
 
     <form method="get" class="gallery-filter-form">
+      <h2 class="gallery-title">Check out some of our recent tattoos</h2>
       <label for="category">Filter by Category:</label>
       <select name="category" id="category" onchange="this.form.submit()">
         <option value="">All Categories</option>

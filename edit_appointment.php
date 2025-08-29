@@ -52,9 +52,9 @@ $form_data = $_SESSION['form_data'] ?? [
 <?php include("header.php"); ?>
 
 <main>
-  <h2 style="text-align:center;">✏️ Edit Appointment</h2>
-
+  
   <form action="edit_appointment_controller.php" method="POST" class="gallery-upload-form">
+    <h2 style="text-align:center;">✏️ Edit Appointment</h2>
     <input type="hidden" name="id" value="<?= $appointment['id'] ?>">
 
     <label>Client Name</label>

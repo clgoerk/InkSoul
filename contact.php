@@ -1,6 +1,11 @@
 <?php
 // contact.php
+require_once("database.php");
+
+// Fetch artists
+$artists = $pdo->query("SELECT id, name FROM artists ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +18,10 @@
   <?php include("header.php"); ?>
 
   <main>
-    <h2 style="text-align:center;">Contact Us & Book an Appointment</h2>
+    
 
     <form method="POST" action="contact_controller.php" class="contact-form" autocomplete="off">
+      <h2 style="text-align:center;">Contact Us & Book an Appointment</h2>
       <label for="name">Full Name</label>
       <input type="text" name="name" id="name" required>
 
@@ -28,6 +34,17 @@
         <option value="Tattoo">Tattoo</option>
         <option value="Piercing">Piercing</option>
         <option value="Consultation">Consultation</option>
+      </select>
+
+      <label for="artist_id">Choose Artist</label>
+      <select name="artist_id" id="artist_id" required>
+        <option value="">-- Select an Artist --</option>
+        <?php
+        $artists = $pdo->query("SELECT id, name FROM artists ORDER BY name")->fetchAll();
+        foreach ($artists as $artist) {
+          echo "<option value=\"{$artist['id']}\">" . htmlspecialchars($artist['name']) . "</option>";
+        }
+        ?>
       </select>
 
       <label for="preferred_date">Preferred Date</label>

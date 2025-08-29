@@ -5,18 +5,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = trim($_POST['name']);
   $email = trim($_POST['email']);
   $service_type = trim($_POST['service_type']);
+  $artist_id = $_POST['artist_id'] ?? null;
   $preferred_date = $_POST['preferred_date'];
   $preferred_time = $_POST['preferred_time'];
   $message = trim($_POST['message']);
 
-  if (!empty($name) && !empty($email) && !empty($service_type) && !empty($preferred_date) && !empty($preferred_time) && !empty($message)) {
+  if (
+    !empty($name) && 
+    !empty($email) && 
+    !empty($service_type) && 
+    !empty($preferred_date) && 
+    !empty($preferred_time) && 
+    !empty($message)
+  ) {
     try {
       $stmt = $pdo->prepare("
-        INSERT INTO contact (name, email, service_type, preferred_date, preferred_time, message) 
-        VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO contact (name, email, service_type, preferred_date, preferred_time, artist_id, message, status, submitted_at) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, 'new', NOW())
       ");
 
-      if ($stmt->execute([$name, $email, $service_type, $preferred_date, $preferred_time, $message])) {
+      if ($stmt->execute([$name, $email, $service_type, $preferred_date, $preferred_time, $artist_id, $message])) {
         header("Location: contact_success.php");
         exit;
       } else {
