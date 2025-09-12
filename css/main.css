@@ -1163,7 +1163,7 @@ form.gallery-upload-form h2 {
 
   /* Galler adjustments */
     .gallery-page {
-    padding: 20px 12px;
+    padding: 20px 20px;
   }
 
   .gallery-grid {
@@ -1172,7 +1172,7 @@ form.gallery-upload-form h2 {
   }
 
   .gallery-item {
-    padding: 8px;
+    padding: 12px;
     border-radius: 6px;
     overflow: hidden;
   }
@@ -1191,8 +1191,8 @@ form.gallery-upload-form h2 {
     word-break: break-word;
   }
 
-  .gallery-info h3 { font-size: 0.95rem; }
-  .gallery-info p  { font-size: 0.9rem;  }
+  .gallery-info h3 { font-size: 1.2em; }
+  .gallery-info p  { font-size: 0.9em;  }
 
   /* Filter select should span the width on mobile */
   .gallery-filter-form {
