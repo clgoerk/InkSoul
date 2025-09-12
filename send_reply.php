@@ -51,7 +51,7 @@ try {
     false
   );
 
-  // ✅ Mark that specific message as replied
+  //  Mark that specific message as replied
   if (isset($_POST['contact_id'])) {
     $stmt = $pdo->prepare("UPDATE contact SET status = 'replied' WHERE id = ?");
     $stmt->execute([$_POST['contact_id']]);

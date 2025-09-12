@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $update->execute([$contact_id]);
   }
 
-  // ✅ Redirect to success page instead of dashboard
+  // Redirect to success page instead of dashboard
   header("Location: appointment_success.php");
   exit;
 }

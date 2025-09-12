@@ -12,8 +12,6 @@ require ("admin_register_controller.php");
 
   <?php include("header.php"); ?>
 
-  <h2 style="text-align:center;">Create an Administration Account</h2>
-
   <?php if (!empty($message)): ?>
     <div class="message <?= strpos($message, '❌') !== false ? 'error' : '' ?>">
       <?= htmlspecialchars($message) ?>
@@ -21,6 +19,7 @@ require ("admin_register_controller.php");
   <?php endif; ?>
 
   <form method="POST" action="" autocomplete="off">
+     <h2 style="text-align:center;">Create an Administration Account</h2>
     <label>Full Name</label>
     <input type="text" name="full_name" required>
 
