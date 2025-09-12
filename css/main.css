@@ -1161,11 +1161,11 @@ form.gallery-upload-form h2 {
     border-radius: 4px;
   }
 
+  /* Galler adjustments */
     .gallery-page {
     padding: 20px 12px;
   }
 
-  /* 1 column, no hard min width */
   .gallery-grid {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -1174,22 +1174,20 @@ form.gallery-upload-form h2 {
   .gallery-item {
     padding: 8px;
     border-radius: 6px;
-    /* keep clipping corners, but content won't be cut because img won't be fixed-height */
     overflow: hidden;
   }
 
-  /* Let the image size naturally; optionally keep a gentle aspect ratio */
   .gallery-item img {
     width: 100%;
-    height: auto;               /* <-- important: remove fixed 80% height */
+    height: auto;              
     display: block;
     object-fit: cover;
-    aspect-ratio: 4 / 5;        /* optional: keeps cards consistent */
+    aspect-ratio: 4 / 5;       
   }
 
   .gallery-info {
     padding: 10px;
-    overflow-wrap: anywhere;     /* prevent long words from spilling */
+    overflow-wrap: anywhere;     
     word-break: break-word;
   }
 
