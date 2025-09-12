@@ -434,146 +434,171 @@ button.button-link:hover {
 }
 
 /* ===================================== */
-/* === Admin Dashboard Tables ========= */
+/* ========== Admin Dashboard ========== */
 /* ===================================== */
 
+/* Container & sections */
 .dashboard-container {
   margin: 30px auto;
   padding: 60px 40px;
   background-color: #fff;
   border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
   width: 100%;
 }
 
 .dashboard-section {
   margin-top: 60px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color .3s ease, transform .3s ease;
 }
-
 .dashboard-section:hover {
-  background-color: #f4f4f4;
-  transform: scale(1.02);
+  background-color: #f7f7f7;
+  transform: scale(1.01);
   cursor: pointer;
 }
-
 .dashboard-section h3 {
-  font-size: 1.4em;
+  font-size: 1.25rem;
   margin-bottom: 10px;
-  padding-bottom: 5px;
-  border-bottom: 2px solid #000;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #111;
   color: #111;
 }
 
-
-
-table {
-  width: 100%;
-  margin-top: 20px;
-  border-collapse: collapse;
-}
-
-th, td {
-  padding: 12px 15px;
-  border-bottom: 1px solid #ccc;
-  text-align: left;
-}
-
-th {
-  background-color: #000;
-  color: #fff;
-}
-
-tr:hover {
-  background-color: #f5f5f5;
-}
-
-td.action-buttons {
-  text-align: center;
-}
-
-.action-buttons form {
+/* “Add New …” link/button style (optional) */
+.button-link {
   display: inline-block;
-  background: none;
-  padding: 0;
-  margin: 0;
+  background: #22e80c;
+  color: #000;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
+}
+.button-link:hover { filter: brightness(.95); }
+
+/* ===================================== */
+/* ============== Tables =============== */
+/* ===================================== */
+
+.admin-table {
+  width: 100%;
+  display: block;                 
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: separate;      
+  border-spacing: 0;
 }
 
+.admin-table thead th {
+  position: sticky;               
+  top: 0;
+  background: #000;
+  color: #fff;
+  z-index: 1;
+}
+
+.admin-table tr {
+  border-bottom: 1px solid #dcdcdc;   
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px 14px;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+}
+
+/* Hover highlight */
+.admin-table tbody tr:hover { background-color: #f5f5f5; }
+
+/* Image cells (artists / gallery / flash) */
+.admin-table td.col-image img {
+  height: 80px;
+  width: auto;
+  border-radius: 6px;
+}
+
+/* ===================================== */
+/* ========= Action Buttons ============ */
+/* ===================================== */
+
+td.action-buttons,
+td.col-actions { 
+  text-align: center; 
+  vertical-align: middle; 
+}
+
+/* REMOVE background from all forms */
+.action-buttons form,
+.col-actions form {
+  display: inline-block;
+  background: transparent !important;
+  margin: 0;
+  padding: 0;
+  box-shadow: none !important;
+  border: none;
+}
+
+.actions-stack {            
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* buttons */
 .edit-btn,
 .approve-btn,
 .delete-btn {
-  width: 75px;
-  padding: 4px 10px;
+  width: 95px;      
+  padding: 6px 12px;
   margin: 2px 0;
-  font-size: 0.85em;
-  font-weight: bold;
-  color: white;
+  font-size: .9rem;
+  font-weight: 700;
+  color: #fff;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.edit-btn {
-  background-color: #007bff;
-}
-
-.edit-btn:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
-  transition: transform 0.2s ease-in-out;
-}
-
-.approve-btn {
-  background-color: #0c0;
-}
-
-.approve-btn:hover {
-  background-color: #040;
-  transform: scale(1.05);
-  transition: transform 0.2s ease-in-out;
-}
-
-.delete-btn {
-  background-color: #dc3545;
-}
-
-.delete-btn:hover {
-  background-color: #a71d2a;
-  transform: scale(1.05);
-  transition: transform 0.2s ease-in-out;
-}
-
-
-/* === Status Labels === */
-.status-cell {
-  text-align: center;
-}
-
-.status-label {
-  display: inline-block;
-  padding: 4px 8px;
   border-radius: 6px;
-  font-weight: bold;
-  font-size: 0.85em;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,.15);
+  transition: transform .15s ease, filter .15s ease;
+}
+.edit-btn     { background: #007bff; }
+.approve-btn  { background: #17a2b8; }
+.delete-btn   { background: #dc3545; }
+
+.edit-btn:hover,
+.approve-btn:hover,
+.delete-btn:hover { 
+  transform: scale(1.05); 
+  filter: brightness(.95); 
+}
+
+/* ===================================== */
+/* ============ Status Pills ============ */
+/* ===================================== */
+
+.status-cell { text-align: center; }
+
+.status-cell .status-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 92px;             
+  padding: 4px 10px;
+  font-size: .82rem;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: 18px;
   text-transform: capitalize;
-  margin: 0 auto;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
 }
 
-.status-label.new {
-  background-color: #f44336;
-  color: white;
-}
-
-.status-label.read {
-  background-color: #ff9800;
-  color: white;
-}
-
-.status-label.replied {
-  background-color: #4caf50;
-  color: white;
-}
+.status-label.read      { background: #ffc107; color: #000; }
+.status-label.pending   { background: #ffc107; color: #000; }
+.status-label.approved  { background: #28a745; color: #fff; }
+.status-label.declined  { background: #dc3545; color: #fff; }
 
 /* ===================================== */
 /* === Artists Page =================== */
@@ -734,8 +759,8 @@ td.action-buttons {
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   padding: 40px 30px;
   margin-bottom: 40px;
-  overflow: hidden; /* ensures it wraps floated/flex children */
-  display: block;   /* just in case */
+  overflow: hidden; 
+  display: block;   
 }
 
 .section-title {
@@ -773,7 +798,7 @@ td.action-buttons {
 
 .service-card img {
   width: 100%;
-  height: 300px; /* prevents collapsing if image doesn't load */
+  height: 300px;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 15px;
@@ -800,8 +825,8 @@ td.action-buttons {
 #processDisplay {
   display: flex;
   flex-direction: column;
-  align-items: center; /* ✅ centers each step horizontally */
-  gap: 12px;           /* ✅ space between steps */
+  align-items: center; 
+  gap: 12px;          
   padding: 10px;
   text-align: center;
 }
@@ -994,15 +1019,29 @@ form.gallery-upload-form h2 {
 /* ===================================== */
 /* === Responsive Styles ============== */
 /* ===================================== */
+
+/* ---------- ≤ 992px (tablet landscape & down) ---------- */
+@media (max-width: 992px) {
+  /* Admin table: hide lowest-priority columns first */
+  .admin-table th.col-email,
+  .admin-table td.col-email,
+  .admin-table th.col-message,
+  .admin-table td.col-message,
+  .admin-table th.col-submitted,
+  .admin-table td.col-submitted {
+    display: none;
+  }
+}
+
+/* ---------- ≤ 768px (tablet portrait & phones) ---------- */
 @media (max-width: 768px) {
+  /* Layout / nav */
   html, body {
     display: grid;
     grid-template-rows: 1fr;
   }
 
-  #mobileMenu {
-    display: block;
-  }
+  #mobileMenu { display: block; }
 
   .nav-links {
     display: none;
@@ -1016,68 +1055,111 @@ form.gallery-upload-form h2 {
     text-align: center;
     z-index: 999;
   }
+  .nav-links.show { display: flex; }
 
-  .nav-links.show {
-    display: flex;
-  }
+  .site-header { height: 220px; }
+  .site-header .site-logo { width: 260px; }
 
-  .site-header {
-    height: 250px;
-  }
+  .home-content { padding: 16px; }
 
-  .site-header .site-logo {
-    width: 300px;
-  }
+  .services-grid { flex-direction: column; }
 
-  .home-content {
-    padding: 20px;
-  }
-
-  .services-grid {
-    flex-direction: column;
-  }
-
+  /* Forms – allow shrinking on mobile */
   form {
-    width: 90%;
-    min-width: 400px;
+    width: 92%;
+    max-width: 100%;
     padding: 10px;
   }
-
   form input,
   form textarea,
   form select,
   form button {
-    font-size: 0.9em;
-    padding: 8px;
-  }
-
-  form label {
     font-size: 0.95em;
+    padding: 9px;
   }
+  form label { font-size: 0.95em; }
 
   .success-container {
-    margin: 40px 16px;
-    padding: 20px;
+    margin: 24px 12px;
+    padding: 18px;
   }
 
   .artist-photo,
   .artist-profile-content .artist-photo {
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
   }
 
   .tattoo-gallery img {
-    width: 140px;
-    height: 200px;
+    width: 130px;
+    height: 186px;
   }
 
-  .artist-detail {
-    padding: 30px 15px;
-  }
-
+  .artist-detail { padding: 24px 14px; }
   .artist-bio,
-  .artist-meta {
+  .artist-meta { font-size: 0.95em; }
+
+  /* ===== Dashboard / Tables (mobile tweaks) ===== */
+  .dashboard-container {
+    padding: 28px 16px;
+    border-radius: 10px;
+  }
+  .dashboard-section { margin-top: 36px; }
+  .dashboard-section h3 {
+    font-size: 1.15em;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+  }
+
+  /* Make table scroll-friendly if still wider than screen */
+  .admin-table {
+    display: block;                 
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-collapse: collapse;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 10px 8px;             
     font-size: 0.95em;
+    line-height: 1.25;
+    white-space: normal;            
+    overflow-wrap: anywhere;        
+    word-wrap: break-word;
+  }
+
+  /* Keep only the essentials visible */
+  .admin-table th.col-artist,
+  .admin-table td.col-artist,
+  .admin-table th.col-service,
+  .admin-table td.col-service,
+  .admin-table th.col-bio,
+  .admin-table td.col-bio,
+  .admin-table th.col-category,
+  .admin-table td.col-category {
+    display: none;
+  }
+
+  td.action-buttons {
+    gap: 4px;
+  }
+  .edit-btn,
+  .approve-btn,
+  .delete-btn {
+    width: 78px;                    
+    padding: 6px 8px;
+    font-size: 0.85em;
+    border-radius: 6px;
+  }
+
+  /* Status pill smaller on mobile */
+  .status-cell .status-label {
+    padding: 3px 7px;
+    font-size: 0.78em;
+    border-radius: 4px;
   }
 }
+
 
